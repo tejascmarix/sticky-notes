@@ -1,0 +1,19 @@
+<button class="btn btn-success btn-add" (click)="addNote()"><i class="fa fa-plus"></i></button>
+<div class="content">
+  <div class="row">
+    <div *ngFor="let n of notes" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">   
+      <div class="note" >  
+        <div class="input-group" style="height:40px">
+            <select [ngModel]="n.option.language" class="form-control pull-left" (change)="changeLanguage(n.id, $event.target.value)">
+                <option *ngFor="let l of languageList" value="{{l.id}}">{{l.value}}</option>
+              </select>
+          <button *ngIf="!n.isEdit" class="btn btn-warning btn-close pull-right" (click)="removeNote(n.id)"><i class="fa fa-close"></i></button>
+          <button *ngIf="n.isEdit" class="btn btn-warning btn-close pull-right" (click)="saveNote(n.id)"><i class="fa fa-check"></i></button>
+        </div>
+        <div class="text">
+            <ngx-monaco-editor [(options)]="n.option" [(ngModel)]="n.new_text" (ngModelChange)="onEditClick(n.id)"></ngx-monaco-editor>
+        </div>
+      </div>
+  </div>
+  </div>
+</div>
